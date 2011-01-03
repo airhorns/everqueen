@@ -33,9 +33,15 @@ module Evergreen
             get '/run/*' do |name|
               @suite = suite
               @spec = suite.get_spec(name)
+              erb :spec
+            end
+
+            get '/helpers.js' do
+              @suite = suite              
               @js_spec_helper = suite.get_spec('spec_helper.js')
               @coffee_spec_helper = suite.get_spec('spec_helper.coffee')
-              erb :spec
+              @response['Content-Type'] = 'application/javascript'
+              erb(:helpers, :layout => false)
             end
           end
         end

@@ -1,22 +1,3 @@
-<script type="text/javascript" src="<%= url("/jasmine/jasmine.js") %>"></script>
-<script type="text/javascript" src="<%= url("/jasmine/jasmine-html.js") %>"></script>
-<script type="text/javascript" src="<%= url("/resources/evergreen.js") %>"></script>
-<script type="text/javascript">
-  // <![CDATA[
-    <% begin %>
-      <%= @js_spec_helper.read.to_s + ";" if @js_spec_helper.exist? %>
-      <%= @coffee_spec_helper.read.to_s + ";" if @coffee_spec_helper.exist? %>
-      <%= @spec.read %>;
-    <% rescue StandardError => e %>
-      describe("failure", function() {
-        it("should not fail", function() {
-          throw(<%= "#{e.class}: #{e.message}".to_json %>);
-        });
-      });
-    <% end %>
-  // ]]>
-</script>
-
 <div id="page">
   <h1>Evergreen</h1>
   <a class="back" href="<%= url("/") %>">Back to list</a>
@@ -25,7 +6,12 @@
 <div id="test"></div>
 
 <script type="text/javascript">
-  (function() {
+  // <![CDATA[
+head.js("<%= url("/jasmine/jasmine.js") %>", "<%= url("/jasmine/jasmine-html.js")%>", "<%= url("/resources/evergreen.js") %>", "<%= url("/helpers.js") %>", function() {console.log("evergreen requires required.");});
+<% begin %>
+head.ready(function() {
+  <%= @spec.read %>;
+  head.ready(function() {
     Evergreen.driver = <%= Evergreen.driver.to_json %>;
     <% @suite.templates.each do |template| %>
       Evergreen.templates[<%= template.name.to_json %>] = <%= template.read.to_json %>;
@@ -34,5 +20,15 @@
     jasmineEnv.addReporter(new jasmine.TrivialReporter());
     jasmineEnv.addReporter(new Evergreen.ReflectiveReporter());
     jasmineEnv.execute();
-  })();
+  });
+});
+<% rescue StandardError => e %>
+  describe("Spec Rendering", function() {
+    it("should not fail when compiling", function() {
+      throw(<%= "#{e.class}: #{e.message}".to_json %>);
+    });
+  });
+<% end %>
+
+  // ]]>
 </script>

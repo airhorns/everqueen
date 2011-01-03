@@ -1,0 +1,10 @@
+<% begin %>
+  <%= @js_spec_helper.read.to_s + ";" if @js_spec_helper.exist? %>
+  <%= @coffee_spec_helper.read.to_s + ";" if @coffee_spec_helper.exist? %>
+<% rescue StandardError => e %>
+  describe("Spec Helper Rendering", function() {
+    it("should not fail while compiling", function() {
+      throw(<%= "#{e.class}: #{e.message}".to_json %>);
+    });
+  });
+<% end %>
