@@ -19,13 +19,13 @@ module Everblue
       Everblue.mounted_at
     end
 
-    def get_spec(name)
-      Spec.new(self, name)
+    def get_test(name)
+      Test.new(self, name)
     end
 
-    def specs
-      Dir.glob(File.join(root, Everblue.spec_dir, '**/*_spec.{js,coffee}')).map do |path|
-        Spec.new(self, path.gsub(File.join(root, Everblue.spec_dir, ''), ''))
+    def tests
+      Dir.glob(File.join(root, Everblue.test_dir, '**/*_test.{js,coffee}')).map do |path|
+        Test.new(self, path.gsub(File.join(root, Everblue.test_dir, ''), ''))
       end
     end
 

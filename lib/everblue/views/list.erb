@@ -8,11 +8,11 @@
     <a class="run" href="<%= url('/run/all') %>">Run</a>
   </div>
 
-  <ul id="specs">
-    <% @suite.specs.each do |spec| %>
+  <ul id="tests">
+    <% @suite.tests.each do |test| %>
       <li>
-        <a href="<%= spec.url %>"><%= spec.name %></a>
-        <a class="run" href="<%= spec.url %>">Run</a>
+        <a href="<%= test.url %>"><%= test.name %></a>
+        <a class="run" href="<%= test.url %>">Run</a>
       </li>
     <% end %>
   </ul>

@@ -17,10 +17,10 @@ Capybara.app = Everblue::Application
 Capybara.default_driver = TEST_DRIVER
 
 module EverblueMatchers
-  class PassSpec # :nodoc:
+  class PassTest # :nodoc:
     def matches?(actual)
       @actual = actual
-      @runner = Everblue::Runner.new(StringIO.new).spec_runner(@actual)
+      @runner = Everblue::Runner.new(StringIO.new).test_runner(@actual)
       @runner.passed?
     end
 
@@ -34,7 +34,7 @@ module EverblueMatchers
   end
 
   def pass
-    PassSpec.new
+    PassTest.new
   end
 end
 

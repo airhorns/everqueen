@@ -1,3 +1,5 @@
+require 'coffee_script'
+
 module Everblue
   class Server
     attr_reader :suite

@@ -8,10 +8,10 @@ module Everblue
         Everblue.mounted_at.to_s + path.to_s
       end
 
-      def render_spec(spec)
-        spec.read if spec
+      def render_test(test)
+        test.read if test
       rescue StandardError => error
-        erb :_spec_error, :locals => { :error => error }
+        erb :_test_error, :locals => { :error => error }
       end
     end
 
@@ -22,21 +22,17 @@ module Everblue
 
     get '/run/all' do
       @suite = Everblue::Suite.new
-      @js_spec_helper = @suite.get_spec('spec_helper.js')
-      @coffee_spec_helper = @suite.get_spec('spec_helper.coffee')
+      @js_test_helper = @suite.get_test('test_helper.js')
+      @coffee_test_helper = @suite.get_test('test_helper.coffee')
       erb :run
     end
 
     get '/run/*' do |name|
       @suite = Everblue::Suite.new
-      @spec = @suite.get_spec(name)
-      @js_spec_helper = @suite.get_spec('spec_helper.js')
-      @coffee_spec_helper = @suite.get_spec('spec_helper.coffee')
+      @test = @suite.get_test(name)
+      @js_test_helper = @suite.get_test('test_helper.js')
+      @coffee_test_helper = @suite.get_test('test_helper.coffee')
       erb :run
-    end
-
-    get "/jasmine/*" do |path|
-      send_file File.expand_path(File.join('../jasmine/lib/jasmine-core', path), File.dirname(__FILE__))
     end
 
     get "/resources/*" do |path|

@@ -1,0 +1,4 @@
+QUnit.module("failure");
+test("should not fail", function() {
+  throw(<%= "#{error.class}: #{error.message}".to_json %>);
+});

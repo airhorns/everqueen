@@ -17,9 +17,9 @@ describe Everblue::Runner do
     end
   end
 
-  describe '#run_spec' do
-    let(:spec) { suite.get_spec('failing_spec.js') }
-    before { runner.spec_runner(spec).run }
+  describe '#run_test' do
+    let(:test) { suite.get_test('failing_test.js') }
+    before { runner.test_runner(test).run }
 
     describe 'the buffer' do
       subject { buffer.rewind; buffer.read }

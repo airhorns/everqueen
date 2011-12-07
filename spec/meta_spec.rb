@@ -2,33 +2,33 @@ require 'spec_helper'
 
 describe Everblue::Runner do
   let(:suite) { Everblue::Suite.new }
-  subject { Everblue::Spec.new(suite, template) }
+  subject { Everblue::Test.new(suite, template) }
 
   context "with standard setup" do
     before { Everblue.root = File.expand_path('suite1', File.dirname(__FILE__)) }
 
-    context "with transactions spec" do
-      let(:template) { 'transactions_spec.js' }
+    context "with transactions test" do
+      let(:template) { 'transactions_test.js' }
       it { should pass }
     end
 
-    context "with spec helper" do
-      let(:template) { 'with_helper_spec.js' }
+    context "with test helper" do
+      let(:template) { 'with_helper_test.js' }
       it { should pass }
     end
 
-    context "with template spec" do
-      let(:template) { 'templates_spec.js' }
+    context "with template test" do
+      let(:template) { 'templates_test.js' }
       it { should pass }
     end
 
     context "invalid coffee" do
-      let(:template) { 'invalid_coffee_spec.coffee' }
+      let(:template) { 'invalid_coffee_test.coffee' }
       it { should_not pass }
     end
 
-    context "with slow failing spec" do
-      let(:template) { 'slow_spec.coffee' }
+    context "with slow failing test" do
+      let(:template) { 'slow_test.coffee' }
       it { should_not pass }
     end
   end
@@ -36,13 +36,13 @@ describe Everblue::Runner do
   context "with modified setup" do
     before { Everblue.root = File.expand_path('suite2', File.dirname(__FILE__)) }
 
-    context "with awesome spec" do
-      let(:template) { 'awesome_spec.js' }
+    context "with awesome test" do
+      let(:template) { 'awesome_test.js' }
       it { should pass }
     end
 
-    context "with failing spec" do
-      let(:template) { 'failing_spec.js' }
+    context "with failing test" do
+      let(:template) { 'failing_test.js' }
       it { should_not pass }
     end
   end

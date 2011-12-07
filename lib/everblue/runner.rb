@@ -20,12 +20,12 @@ module Everblue
       end
     end
 
-    class SpecRunner
-      attr_reader :runner, :spec
+    class TestRunner
+      attr_reader :runner, :test
 
-      def initialize(runner, spec)
+      def initialize(runner, test)
         @runner = runner
-        @spec = spec
+        @test = test
       end
 
       def session
@@ -45,7 +45,7 @@ module Everblue
 
       def examples
         @results ||= begin
-          session.visit(spec.url)
+          session.visit(test.url)
 
           previous_results = ""
 
@@ -91,8 +91,8 @@ module Everblue
       @io = io
     end
 
-    def spec_runner(spec)
-      SpecRunner.new(self, spec)
+    def test_runner(test)
+      TestRunner.new(self, test)
     end
 
     def run
@@ -113,7 +113,7 @@ module Everblue
     end
 
     def examples
-      spec_runners.map { |spec_runner| spec_runner.examples }.flatten
+      test_runners.map { |test_runner| test_runner.examples }.flatten
     end
 
     def failed_examples
@@ -121,16 +121,16 @@ module Everblue
     end
 
     def passed?
-      spec_runners.all? { |spec_runner| spec_runner.passed? }
+      test_runners.all? { |test_runner| test_runner.passed? }
     end
 
     def dots
-      spec_runners.map { |spec_runner| spec_runner.dots }.join
+      test_runners.map { |test_runner| test_runner.dots }.join
     end
 
     def failure_messages
       unless passed?
-        spec_runners.map { |spec_runner| spec_runner.failure_messages }.compact.join("\n\n")
+        test_runners.map { |test_runner| test_runner.failure_messages }.compact.join("\n\n")
       end
     end
 
@@ -144,8 +144,8 @@ module Everblue
 
   protected
 
-    def spec_runners
-      @spec_runners ||= suite.specs.map { |spec| SpecRunner.new(self, spec) }
+    def test_runners
+      @test_runners ||= suite.tests.map { |test| TestRunner.new(self, test) }
     end
   end
 end

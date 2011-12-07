@@ -1,7 +1,7 @@
 require 'open3'
 
 module Everblue
-  class Spec
+  class Test
     attr_reader :name, :suite
 
     def initialize(suite, name)
@@ -14,7 +14,7 @@ module Everblue
     end
 
     def full_path
-      File.join(root, Everblue.spec_dir, name)
+      File.join(root, Everblue.test_dir, name)
     end
 
     def read
@@ -46,7 +46,7 @@ module Everblue
   protected
 
     def runner
-      @runner ||= suite.runner.spec_runner(self)
+      @runner ||= suite.runner.test_runner(self)
     end
   end
 end

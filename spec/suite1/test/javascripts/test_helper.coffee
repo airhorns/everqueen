@@ -1,0 +1,1 @@
+window.CoffeeTestHelper = { coffee: 'script' }

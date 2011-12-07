@@ -4,14 +4,14 @@
 <script type="text/javascript" src="<%= url("/resources/run.js") %>"></script>
 <script type="text/javascript">
   // <![CDATA[
-      <%= render_spec(@coffee_spec_helper) if @coffee_spec_helper.exist? %>;
-      <%= render_spec(@js_spec_helper) if @js_spec_helper.exist? %>;
-      <% if @spec %>
-        <%= render_spec(@spec) %>
+      <%= render_test(@coffee_test_helper) if @coffee_test_helper.exist? %>;
+      <%= render_test(@js_test_helper) if @js_test_helper.exist? %>;
+      <% if @test %>
+        <%= render_test(@test) %>
       <% else %>
-        <% @suite.specs.each do |spec| %>
-          describe("<%= spec.name %>", function() {
-            <%= render_spec(spec) %>;
+        <% @suite.tests.each do |test| %>
+          describe("<%= test.name %>", function() {
+            <%= render_test(test) %>;
           });
         <% end %>
       <% end %>
