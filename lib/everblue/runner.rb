@@ -1,4 +1,4 @@
-module Evergreen
+module Everblue
   class Runner
     class Example
       def initialize(row)
@@ -50,17 +50,17 @@ module Evergreen
           previous_results = ""
 
           session.wait_until(300) do
-            dots = session.evaluate_script('Evergreen.dots')
+            dots = session.evaluate_script('Everblue.dots')
             io.print dots.sub(/^#{Regexp.escape(previous_results)}/, '')
             io.flush
             previous_results = dots
-            session.evaluate_script('Evergreen.done')
+            session.evaluate_script('Everblue.done')
           end
 
-          dots = session.evaluate_script('Evergreen.dots')
+          dots = session.evaluate_script('Everblue.dots')
           io.print dots.sub(/^#{Regexp.escape(previous_results)}/, '')
 
-          JSON.parse(session.evaluate_script('Evergreen.getResults()')).map do |row|
+          JSON.parse(session.evaluate_script('Everblue.getResults()')).map do |row|
             Example.new(row)
           end
         end
@@ -135,11 +135,11 @@ module Evergreen
     end
 
     def session
-      @session ||= Capybara::Session.new(Evergreen.driver, Evergreen.application)
+      @session ||= Capybara::Session.new(Everblue.driver, Everblue.application)
     end
 
     def suite
-      @suite ||= Evergreen::Suite.new
+      @suite ||= Everblue::Suite.new
     end
 
   protected

@@ -19,7 +19,7 @@
 </script>
 
 <div id="page">
-  <h1>Evergreen</h1>
+  <h1>Everblue</h1>
   <a class="back" href="<%= url("/") %>">Back to list</a>
 </div>
 
@@ -28,14 +28,14 @@
 <script type="text/javascript">
   // <![CDATA[
     (function() {
-      Evergreen.driver = <%= Evergreen.driver.to_json %>;
+      Everblue.driver = <%= Everblue.driver.to_json %>;
       <% @suite.templates.each do |template| %>
-        Evergreen.templates[<%= template.name.to_json %>] = <%= template.escaped_contents %>;
+        Everblue.templates[<%= template.name.to_json %>] = <%= template.escaped_contents %>;
       <% end %>
       var jasmineExecute = function() {
         var jasmineEnv = jasmine.getEnv();
         jasmineEnv.addReporter(new jasmine.TrivialReporter());
-        jasmineEnv.addReporter(new Evergreen.ReflectiveReporter());
+        jasmineEnv.addReporter(new Everblue.ReflectiveReporter());
         jasmineEnv.execute();
       };
       if (window.addEventListener) {

@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe Evergreen::Suite do
-  subject { Evergreen::Suite.new }
+describe Everblue::Suite do
+  subject { Everblue::Suite.new }
 
   its(:root) { should == File.expand_path('suite1', File.dirname(__FILE__)) }
 
   describe '#get_spec' do
-    subject { Evergreen::Suite.new.get_spec('testing_spec.js') }
+    subject { Everblue::Suite.new.get_spec('testing_spec.js') }
     its(:name) { should == 'testing_spec.js' }
     its(:root) { should == File.expand_path('suite1', File.dirname(__FILE__)) }
   end

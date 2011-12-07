@@ -2,17 +2,17 @@ require 'rubygems'
 require 'sinatra/base'
 require 'capybara'
 require 'launchy'
-require 'evergreen/version'
-require 'evergreen/application'
+require 'everblue/version'
+require 'everblue/application'
 require 'json'
 
-module Evergreen
-  autoload :Cli, 'evergreen/cli'
-  autoload :Server, 'evergreen/server'
-  autoload :Runner, 'evergreen/runner'
-  autoload :Suite, 'evergreen/suite'
-  autoload :Spec, 'evergreen/spec'
-  autoload :Template, 'evergreen/template'
+module Everblue
+  autoload :Cli, 'everblue/cli'
+  autoload :Server, 'everblue/server'
+  autoload :Runner, 'everblue/runner'
+  autoload :Suite, 'everblue/suite'
+  autoload :Spec, 'everblue/spec'
+  autoload :Template, 'everblue/template'
 
   class << self
     attr_accessor :driver, :public_dir, :template_dir, :spec_dir, :root, :mounted_at, :application
@@ -23,7 +23,7 @@ module Evergreen
 
     def use_defaults!
       configure do |config|
-        config.application = Evergreen::Application
+        config.application = Everblue::Application
         config.driver = :selenium
         config.public_dir = 'public'
         config.spec_dir = 'spec/javascripts'
@@ -34,4 +34,4 @@ module Evergreen
   end
 end
 
-Evergreen.use_defaults!
+Everblue.use_defaults!

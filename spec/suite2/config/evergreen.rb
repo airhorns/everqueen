@@ -1,4 +1,4 @@
-Evergreen.configure do |config|
+Everblue.configure do |config|
   config.public_dir = 'public_html'
   config.template_dir = 'templates'
   config.spec_dir = 'spec'

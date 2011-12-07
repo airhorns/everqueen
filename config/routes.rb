@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  mount Evergreen::Application, :at => '/evergreen'
+  mount Everblue::Application, :at => '/everblue'
 end

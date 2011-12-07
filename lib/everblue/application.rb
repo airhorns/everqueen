@@ -1,11 +1,11 @@
-module Evergreen
+module Everblue
   class Application < Sinatra::Base
     set :static, false
     set :root, File.expand_path('.', File.dirname(__FILE__))
 
     helpers do
       def url(path)
-        Evergreen.mounted_at.to_s + path.to_s
+        Everblue.mounted_at.to_s + path.to_s
       end
 
       def render_spec(spec)
@@ -16,19 +16,19 @@ module Evergreen
     end
 
     get '/' do
-      @suite = Evergreen::Suite.new
+      @suite = Everblue::Suite.new
       erb :list
     end
 
     get '/run/all' do
-      @suite = Evergreen::Suite.new
+      @suite = Everblue::Suite.new
       @js_spec_helper = @suite.get_spec('spec_helper.js')
       @coffee_spec_helper = @suite.get_spec('spec_helper.coffee')
       erb :run
     end
 
     get '/run/*' do |name|
-      @suite = Evergreen::Suite.new
+      @suite = Everblue::Suite.new
       @spec = @suite.get_spec(name)
       @js_spec_helper = @suite.get_spec('spec_helper.js')
       @coffee_spec_helper = @suite.get_spec('spec_helper.coffee')
@@ -44,7 +44,7 @@ module Evergreen
     end
 
     get '/*' do |path|
-      send_file File.join(Evergreen.root, Evergreen.public_dir, path)
+      send_file File.join(Everblue.root, Everblue.public_dir, path)
     end
   end
 end

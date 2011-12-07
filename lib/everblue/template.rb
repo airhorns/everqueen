@@ -1,4 +1,4 @@
-module Evergreen
+module Everblue
   class Template
     attr_reader :name, :suite
 
@@ -12,7 +12,7 @@ module Evergreen
     end
 
     def full_path
-      File.join(root, Evergreen.template_dir, name)
+      File.join(root, Everblue.template_dir, name)
     end
 
     def read

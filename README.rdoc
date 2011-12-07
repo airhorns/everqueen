@@ -1,19 +1,19 @@
-= Evergreen
+= Everblue
 
-{<img src="http://travis-ci.org/jnicklas/evergreen.png" />}[http://travis-ci.org/jnicklas/evergreen]
+{<img src="http://travis-ci.org/jnicklas/everblue.png" />}[http://travis-ci.org/jnicklas/everblue]
 
 "Because green is the new Blue(Ridge)"
 
-Evergreen is a tool to run javascript unit tests for client side JavaScript. It
-combines a server which allows you to serve up and run your specs in a browser,
+Everblue is a tool to run javascript unit tests for client side JavaScript. It
+combines a server which allows you to serve up and run your tests in a browser,
 as well as a runner which uses Capybara and any of its drivers to run your
-specs. Evergreen uses the Jasmine unit testing framework for JavaScript.
+tests. Everblue uses the QUnit unit testing framework for JavaScript.
 
-http://github.com/jnicklas/evergreen
+http://github.com/hornairs/everblue
 
 == Philosophy
 
-Evergreen is a unit testing tool. Its purpose is to test JavaScript in
+Everblue is a unit testing tool. Its purpose is to test JavaScript in
 isolation from your application. If you need a tool that tests how your
 JavaScript integrates with your application you should use an integration
 testing framework, such as {Capybara}[http://github.com/jnicklas/capybara].
@@ -21,27 +21,27 @@ testing framework, such as {Capybara}[http://github.com/jnicklas/capybara].
 == Community
 
 Please ask questions on the {mailing
-list}[http://groups.google.com/group/ruby-evergreen].  If you have found a
+list}[http://groups.google.com/group/ruby-everblue].  If you have found a
 reproducible error, please {file it on
-GitHub}[https://github.com/jnicklas/evergreen/issues]. Do not contact the
+GitHub}[https://github.com/jnicklas/everblue/issues]. Do not contact the
 maintainers directly.
 
 == Installation
 
 Install as a Ruby gem:
 
-    gem install evergreen
+    gem install everblue
 
 == Usage
 
-Evergreen assumes a file and directory structure, place all your javascript
-code inside ./public and all spec files inside ./spec/javascripts. All spec
-files should end in _spec.js. For example:
+Everblue assumes a file and directory structure, place all your javascript
+code inside ./public and all test files inside ./test/javascripts. All test
+files should end in _test.js. For example:
 
     public/javascripts/widget.js
-    spec/javascripts/widget_spec.js
+    test/javascripts/widget_test.js
 
-You can require files from the public directory inside your spec file:
+You can require files from the public directory inside your test file:
 
     require('/javascripts/widget.js')
 
@@ -49,64 +49,64 @@ You can require files from the public directory inside your spec file:
       ...
     });
 
-You can now look at your spec files inside a browser by starting up the
-Evergreen server:
+You can now look at your test files inside a browser by starting up the
+Everblue server:
 
-    evergreen serve
+    everblue serve
 
-Alternatively you can run the specs headlessly by running:
+Alternatively you can run the tests headlessly by running:
 
-    evergreen run
+    everblue run
 
 == Integrating with Rails 3
 
-Add Evergreen to your Gemfile:
+Add Everblue to your Gemfile:
 
-    gem 'evergreen', :require => 'evergreen/rails'
+    gem 'everblue', :require => 'everblue/rails'
 
-Start your rails application and navigate to /evergreen. You should now see a
-list of all spec files, click on one to run it.
+Start your rails application and navigate to /everblue. You should now see a
+list of all test files, click on one to run it.
 
-There's a rake task provided for you that you can use to run your specs:
+There's a rake task provided for you that you can use to run your tests:
 
-    rake spec:javascripts
+    rake test:javascripts
 
 == Integrating with Rails 2
 
 Add the following line to your Rakefile:
 
-    require 'evergreen/tasks'
+    require 'everblue/tasks'
 
-This will give you the `spec:javascripts` rake task. Note that mounting is not
-possible under Rails 2 and that `require 'evergreen/rails'` will fail.
+This will give you the `test:javascripts` rake task. Note that mounting is not
+possible under Rails 2 and that `require 'everblue/rails'` will fail.
 
 == Configuration
 
-By default, Evergreen uses Selenium to run your specs and assumes a certain
+By default, Everblue uses Selenium to run your tests and assumes a certain
 directory structure. If this standard is fine for you, then you don't need to
-do anything else. If you need to configure Evergreen to suit your needs,
-Evergreen will automatically look for and load the following files:
+do anything else. If you need to configure Everblue to suit your needs,
+Everblue will automatically look for and load the following files:
 
-    config/evergreen.rb
-    .evergreen
-    ~/.evergreen
+    config/everblue.rb
+    .everblue
+    ~/.everblue
 
 The content of these files could look like this:
 
     require 'capybara-webkit'
 
-    Evergreen.configure do |config|
+    Everblue.configure do |config|
       config.driver = :webkit
       config.public_dir = 'public_html'
       config.template_dir = 'templates'
-      config.spec_dir = 'spec'
+      config.test_dir = 'test'
     end
 
 == Transactions
 
 One problem often faced when writing unit tests for client side code is that
 changes to the page are not reverted for the next example, so that successive
-examples become dependent on each other. Evergreen adds a special div to your
+examples become dependent on each other. Everblue adds a testial div to your
 page with an id of test. This div is automatically emptied before each example.
 You should avoid appending markup to the page body and instead append it to
 this test div:
@@ -124,14 +124,14 @@ this test div:
 
 == Templates
 
-Even more powerful than that, Evergreen allows you to create HTML templates to
-go along with your specs. Put the templates in their own folder like this:
+Even more powerful than that, Everblue allows you to create HTML templates to
+go along with your tests. Put the templates in their own folder like this:
 
-    spec/javascripts/templates/one_template.html
-    spec/javascripts/templates/another_template.html
+    test/javascripts/templates/one_template.html
+    test/javascripts/templates/another_template.html
 
 You can then load the template into the test div, by calling the template
-function in your specs:
+function in your tests:
 
     describe('transactions', function() {
       template('one_template.html')
@@ -141,41 +141,41 @@ function in your specs:
       });
     });
 
-== Spec Helper
+== test Helper
 
-If you add a spec_helper file like so:
+If you add a test_helper file like so:
 
-    spec/javascripts/spec_helper.js
+    test/javascripts/test_helper.js
 
 It will automatically be loaded. This is a great place for adding custom
 matchers and the like.
 
 == CoffeeScript
 
-Evergreen supports specs written in
-{CoffeeScript}[http://github.com/jashkenas/coffee-script]. Just name your spec
-file _spec.coffee and it will automatically be translated for you.
+Everblue supports tests written in
+{CoffeeScript}[http://github.com/jashkenas/coffee-script]. Just name your test
+file _test.coffee and it will automatically be translated for you.
 
-You can also add a CoffeeScript spec helper, but remember that CoffeeScript
+You can also add a CoffeeScript test helper, but remember that CoffeeScript
 encloses individual files in a closure, if you need something you define in the
-spec helper to be available in your spec files, attach it to the window object:
+test helper to be available in your test files, attach it to the window object:
 
-    # spec/javascripts/spec_helper.coffee
+    # test/javascripts/test_helper.coffee
 
-    MyThing: "foo"          # local to spec helper
+    MyThing: "foo"          # local to test helper
     window.MyThing: "foo"   # global
 
 == Development
 
-If you plan to work on Evergreen, you need to checkout the Jasmine gem, which
+If you plan to work on Everblue, you need to checkout the QUnit library, which
 is added as a git submodule. Run the following command:
 
     git submodule update --init
 
-If you're using a version of Evergreen from git with bundler, you need to tell
+If you're using a version of Everblue from git with bundler, you need to tell
 bundler to use submodules, this can be achieved with the following command:
 
-    gem 'evergreen', :submodules => true, :git => 'git://github.com/jnicklas/evergreen.git'
+    gem 'everblue', :submodules => true, :git => 'git://github.com/jnicklas/everblue.git'
 
 == License:
 

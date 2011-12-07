@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe Evergreen::Runner do
-  let(:suite) { Evergreen::Suite.new }
-  subject { Evergreen::Spec.new(suite, template) }
+describe Everblue::Runner do
+  let(:suite) { Everblue::Suite.new }
+  subject { Everblue::Spec.new(suite, template) }
 
   context "with standard setup" do
-    before { Evergreen.root = File.expand_path('suite1', File.dirname(__FILE__)) }
+    before { Everblue.root = File.expand_path('suite1', File.dirname(__FILE__)) }
 
     context "with transactions spec" do
       let(:template) { 'transactions_spec.js' }
@@ -34,7 +34,7 @@ describe Evergreen::Runner do
   end
 
   context "with modified setup" do
-    before { Evergreen.root = File.expand_path('suite2', File.dirname(__FILE__)) }
+    before { Everblue.root = File.expand_path('suite2', File.dirname(__FILE__)) }
 
     context "with awesome spec" do
       let(:template) { 'awesome_spec.js' }

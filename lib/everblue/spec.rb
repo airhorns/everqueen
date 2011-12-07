@@ -1,6 +1,6 @@
 require 'open3'
 
-module Evergreen
+module Everblue
   class Spec
     attr_reader :name, :suite
 
@@ -14,7 +14,7 @@ module Evergreen
     end
 
     def full_path
-      File.join(root, Evergreen.spec_dir, name)
+      File.join(root, Everblue.spec_dir, name)
     end
 
     def read
