@@ -1,0 +1,39 @@
+#= require jquery
+#= require json2
+#= require qunit
+#= require_self
+#= require test_helper
+
+Everblue =
+  done: false
+  dots: ""
+  driver: <%= Everblue.driver.to_json %>
+  results: []
+
+Everblue.getResults = ->
+  JSON.stringify Everblue.results
+
+currentTest = {}
+QUnit.testDone (results) ->
+  Everblue.dots += (if results.failed > 0 then "F" else ".")
+  Everblue.results.push
+    name: results.name
+    passed: results.failed is 0
+    message: currentTest.message
+
+  currentTest = {}
+
+QUnit.log (results) ->
+  unless results.result
+    message = if results.message
+      results.message
+    else
+      "Expected '#{results.expected}', got '#{results.actual}'"
+    currentTest.message = message
+    currentTest.trace = results.source
+
+QUnit.done (results) ->
+  Everblue.done = true
+
+QUnit.config.autorun = false
+window.Everblue = Everblue

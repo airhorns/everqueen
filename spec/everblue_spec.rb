@@ -25,7 +25,7 @@ describe Everblue::Application do
     visit("/")
     click_link("All")
     sleep 2
-    page.should have_content("7 tests of 9 passed, 2 failed.")
+    page.should have_content("9 tests of 11 passed, 2 failed.")
   end
 
   it "should run a test inline" do

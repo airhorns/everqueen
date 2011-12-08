@@ -8,12 +8,6 @@ describe Everblue::Test do
   its(:root) { should == File.expand_path('suite1', File.dirname(__FILE__)) }
   its(:full_path) { should == File.expand_path("test/javascripts/testing_test.js", Everblue.root) }
   its(:url) { should == "/run/testing_test.js" }
-  its(:contents) { should =~ /describe\('testing'/ }
-
-  context "with coffeescript" do
-    subject { Everblue::Test.new(suite, 'coffeescript_test.coffee') }
-    its(:contents) { should =~ /describe\('coffeescript', function/ }
-  end
 
   context "with existing test file" do
     it { should exist }

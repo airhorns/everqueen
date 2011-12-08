@@ -12,8 +12,8 @@ describe Everblue::Runner do
       subject { buffer.rewind; buffer.read }
 
       it { should include('.F..') }
-      it { should include("Expected 'bar' to equal 'noooooo'") }
-      it { should include("18 examples, 3 failures") }
+      it { should include("Expected 'noooooo', got 'bar'") }
+      it { should include("10 assertions, 2 failures") }
     end
   end
 
@@ -25,8 +25,8 @@ describe Everblue::Runner do
       subject { buffer.rewind; buffer.read }
 
       it { should include('.F') }
-      it { should include("Expected 'bar' to equal 'noooooo'") }
-      it { should include("2 examples, 1 failures") }
+      it { should include("Expected 'noooooo', got 'bar'") }
+      it { should include("2 assertions, 1 failures") }
     end
   end
 end

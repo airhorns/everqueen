@@ -14,7 +14,7 @@ module Everblue
           msg = []
           msg << "  Failed: #{@row['name']}"
           msg << "    #{@row['message']}"
-          msg << "    in #{@row['trace']['fileName']}:#{@row['trace']['lineNumber']}" if @row['trace']
+          msg << "    in #{@row['trace']}" if @row['trace']
           msg.join("\n")
         end
       end
@@ -39,7 +39,7 @@ module Everblue
       def run
         io.puts dots
         io.puts failure_messages
-        io.puts "\n#{examples.size} examples, #{failed_examples.size} failures"
+        io.puts "\n#{examples.size} assertions, #{failed_examples.size} failures"
         passed?
       end
 
@@ -108,7 +108,7 @@ module Everblue
 
       seconds = "%.2f" % (Time.now - before)
       io.puts "Finished in #{seconds} seconds"
-      io.puts "#{examples.size} examples, #{failed_examples.size} failures"
+      io.puts "#{examples.size} assertions, #{failed_examples.size} failures"
       passed?
     end
 

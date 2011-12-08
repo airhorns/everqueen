@@ -1,5 +1,4 @@
-describe('failing', function() {
-  it('fails', function() {
-    expect('llama').toEqual('monkey');
-  });
+QUnit.module('failing');
+test('fails', function() {
+  equal('llama', 'monkey');
 });
