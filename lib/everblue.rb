@@ -13,10 +13,9 @@ module Everblue
   autoload :Runner, 'everblue/runner'
   autoload :Suite, 'everblue/suite'
   autoload :Test, 'everblue/test'
-  autoload :Template, 'everblue/template'
 
   class << self
-    attr_accessor :driver, :public_dir, :template_dir, :test_dir, :root, :mounted_at, :application
+    attr_accessor :driver, :public_dir, :test_dir, :root, :mounted_at, :application
 
     def configure
       yield self
@@ -28,7 +27,6 @@ module Everblue
         config.driver = :selenium
         config.public_dir = 'public'
         config.test_dir = 'test/javascripts'
-        config.template_dir = 'test/javascripts/templates'
         config.mounted_at = ""
       end
     end

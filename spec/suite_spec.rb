@@ -16,10 +16,4 @@ describe Everblue::Suite do
       subject.tests.map(&:name).should include('testing_test.js', 'foo_test.js', 'bar_test.js', 'libs/lucid_test.js', 'models/game_test.js')
     end
   end
-
-  describe '#templates' do
-    it "should find all tests in the given root directory" do
-      subject.templates.map(&:name).should include('one_template.html', 'another_template.html')
-    end
-  end
 end

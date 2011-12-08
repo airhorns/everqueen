@@ -17,16 +17,6 @@ describe Everblue::Runner do
       it { should pass }
     end
 
-    context "with template test" do
-      let(:template) { 'templates_test.js' }
-      it { should pass }
-    end
-
-    context "invalid coffee" do
-      let(:template) { 'invalid_coffee_test.coffee' }
-      it { should_not pass }
-    end
-
     context "with slow failing test" do
       let(:template) { 'slow_test.coffee' }
       it { should_not pass }

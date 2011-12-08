@@ -28,11 +28,5 @@ module Everblue
         Test.new(self, path.gsub(File.join(root, Everblue.test_dir, ''), ''))
       end
     end
-
-    def templates
-      Dir.glob(File.join(root, Everblue.template_dir, '*')).map do |path|
-        Template.new(self, File.basename(path))
-      end
-    end
   end
 end
