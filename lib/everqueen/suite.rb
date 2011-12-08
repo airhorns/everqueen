@@ -24,7 +24,7 @@ module Everqueen
     end
 
     def tests
-      Dir.glob(File.join(root, Everqueen.test_dir, '**/*_test.{js,coffee}')).map do |path|
+      Dir.glob(File.join(root, Everqueen.test_dir, '**/*_test.{js,coffee,js.coffee}')).map do |path|
         Test.new(self, path.gsub(File.join(root, Everqueen.test_dir, ''), ''))
       end
     end

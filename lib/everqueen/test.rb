@@ -6,7 +6,7 @@ module Everqueen
 
     def initialize(suite, name)
       @suite = suite
-      @name = name
+      @name = name.sub('js.coffee', 'js')
     end
 
     def root
