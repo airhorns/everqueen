@@ -17,15 +17,7 @@ module Everblue
       File.join(root, Everblue.test_dir, name)
     end
 
-    def read
-      if full_path =~ /\.coffee$/
-        require 'coffee-script'
-        CoffeeScript.compile(File.read(full_path))
-      else
-        File.read(full_path)
-      end
-    end
-    alias_method :contents, :read
+    alias_method :asset_path, :name
 
     def url
       "#{suite.mounted_at}/run/#{name}"

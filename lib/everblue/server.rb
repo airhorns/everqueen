@@ -17,4 +17,3 @@ module Everblue
     end
   end
 end
-

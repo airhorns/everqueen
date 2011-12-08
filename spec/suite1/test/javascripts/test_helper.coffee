@@ -1,1 +1,0 @@
-window.CoffeeTestHelper = { coffee: 'script' }

@@ -1,49 +1,20 @@
-<script type="text/javascript" src="<%= url("/jasmine/jasmine.js") %>"></script>
-<script type="text/javascript" src="<%= url("/jasmine/jasmine-html.js") %>"></script>
-<script type="text/javascript" src="<%= url("/resources/json2.js") %>"></script>
-<script type="text/javascript" src="<%= url("/resources/run.js") %>"></script>
-<script type="text/javascript">
-  // <![CDATA[
-      <%= render_test(@coffee_test_helper) if @coffee_test_helper.exist? %>;
-      <%= render_test(@js_test_helper) if @js_test_helper.exist? %>;
-      <% if @test %>
-        <%= render_test(@test) %>
-      <% else %>
-        <% @suite.tests.each do |test| %>
-          describe("<%= test.name %>", function() {
-            <%= render_test(test) %>;
-          });
-        <% end %>
-      <% end %>
-  // ]]>
-</script>
+<script type="text/javascript" src="<%= url("/assets/run.js") %>"></script>
+<% if @test %>
+<script type="text/javascript" src="<%= url("/assets/" + @test.asset_path) %>"></script>
+<% else %>
+  <% @suite.tests.each do |test| %>
+    <script type="text/javascript" src="<%= url("/assets/" + test.asset_path) %>"></script>
+  <% end %>
+<% end %>
 
 <div id="page">
-  <h1>Everblue</h1>
+  <h1 id="qunit-header">Everblue</h1>
+  <h2 id="qunit-banner"></h2>
+  <div id="qunit-testrunner-toolbar"></div>
+  <h2 id="qunit-userAgent"></h2>
+  <ol id="qunit-tests"></ol>
+  <div id="qunit-fixture">test markup, will be hidden</div>
   <a class="back" href="<%= url("/") %>">Back to list</a>
 </div>
 
-<div id="test"></div>
-
-<script type="text/javascript">
-  // <![CDATA[
-    (function() {
-      Everblue.driver = <%= Everblue.driver.to_json %>;
-      <% @suite.templates.each do |template| %>
-        Everblue.templates[<%= template.name.to_json %>] = <%= template.escaped_contents %>;
-      <% end %>
-      var jasmineExecute = function() {
-        var jasmineEnv = jasmine.getEnv();
-        jasmineEnv.addReporter(new jasmine.TrivialReporter());
-        jasmineEnv.addReporter(new Everblue.ReflectiveReporter());
-        jasmineEnv.execute();
-      };
-      if (window.addEventListener) {
-        window.addEventListener("load", jasmineExecute, false);
-      }
-      else {
-        window.attachEvent("onload", jasmineExecute);
-      }
-    })();
-  // ]]>
-</script>
+<script type="text/javascript" src="<%= url("/assets/start.js") %>"></script>

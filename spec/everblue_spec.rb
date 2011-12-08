@@ -6,27 +6,25 @@ describe Everblue::Application do
   it "should show a successful test run" do
     visit("/")
     click_link("testing_test.js")
-    page.should have_content("2 tests, 0 failures")
+    page.should have_content("2 tests of 2 passed, 0 failed.")
   end
 
   it "should show a successful test run for a coffeescript test" do
     visit("/")
     click_link("coffeescript_test.coffee")
-    page.should have_content("2 tests, 0 failures")
+    page.should have_content("2 tests of 2 passed, 0 failed.")
   end
 
   it "should show errors for a failing test" do
     visit("/")
     click_link("failing_test.js")
-    page.should have_content("2 tests, 1 failure")
-    page.should have_content("Expected 'bar' to equal 'noooooo'.")
+    page.should have_content("1 tests of 2 passed, 1 failed.")
   end
 
   it "should run all tests" do
     visit("/")
     click_link("All")
-    page.should have_content("18 tests, 3 failures")
-    page.should have_content("Expected 'bar' to equal 'noooooo'.")
+    page.should have_content("7 tests of 10 passed, 3 failed.")
   end
 
   it "should run a test inline" do
