@@ -1,5 +1,3 @@
-//= require jquery
-
 QUnit.module('transactions');
 
 test("should add stuff in one test...", function() {
