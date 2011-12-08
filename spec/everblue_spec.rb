@@ -24,12 +24,14 @@ describe Everblue::Application do
   it "should run all tests" do
     visit("/")
     click_link("All")
-    page.should have_content("7 tests of 10 passed, 3 failed.")
+    sleep 2
+    page.should have_content("7 tests of 9 passed, 2 failed.")
   end
 
   it "should run a test inline" do
     visit("/")
-    within('li', :text => 'testing_test.js') do
+    # "testing_test.js"
+    within('#tests li:nth-child(6)') do
       click_link("Run")
       page.should have_content('Pass')
     end
@@ -37,7 +39,8 @@ describe Everblue::Application do
 
   it "should run a failing test inline" do
     visit("/")
-    within('li', :text => 'failing_test.js') do
+    # "failing_test.js"
+    within('#tests li:nth-child(2)') do
       click_link("Run")
       begin
         page.should have_content('Fail')
