@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe Everblue::Runner do
-  let(:suite) { Everblue::Suite.new }
-  subject { Everblue::Test.new(suite, template) }
+describe Everqueen::Runner do
+  let(:suite) { Everqueen::Suite.new }
+  subject { Everqueen::Test.new(suite, template) }
 
   context "with standard setup" do
-    before { Everblue.root = File.expand_path('suite1', File.dirname(__FILE__)) }
+    before { Everqueen.root = File.expand_path('suite1', File.dirname(__FILE__)) }
 
     context "with transactions test" do
       let(:template) { 'transactions_test.js' }
@@ -24,7 +24,7 @@ describe Everblue::Runner do
   end
 
   context "with modified setup" do
-    before { Everblue.root = File.expand_path('suite2', File.dirname(__FILE__)) }
+    before { Everqueen.root = File.expand_path('suite2', File.dirname(__FILE__)) }
 
     context "with awesome test" do
       let(:template) { 'awesome_test.js' }

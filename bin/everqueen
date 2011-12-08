@@ -2,11 +2,11 @@
 
 $:.unshift(File.dirname(__FILE__) + '/../lib') unless $:.include?(File.dirname(__FILE__) + '/../lib')
 
-require 'everblue'
+require 'everqueen'
 
 begin
   # The dup is to keep ARGV intact, so that tools like ruby-debug can respawn.
-  success = Everblue::Cli.execute(ARGV.dup)
+  success = Everqueen::Cli.execute(ARGV.dup)
   Kernel.exit(success ? 0 : 1)
 rescue SystemExit => e
   Kernel.exit(e.status)

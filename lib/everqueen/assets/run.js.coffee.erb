@@ -4,19 +4,19 @@
 #= require_self
 #= require test_helper
 
-Everblue =
+Everqueen =
   done: false
   dots: ""
-  driver: <%= Everblue.driver.to_json %>
+  driver: <%= Everqueen.driver.to_json %>
   results: []
 
-Everblue.getResults = ->
-  JSON.stringify Everblue.results
+Everqueen.getResults = ->
+  JSON.stringify Everqueen.results
 
 currentTest = {}
 QUnit.testDone (results) ->
-  Everblue.dots += (if results.failed > 0 then "F" else ".")
-  Everblue.results.push
+  Everqueen.dots += (if results.failed > 0 then "F" else ".")
+  Everqueen.results.push
     name: results.name
     passed: results.failed is 0
     message: currentTest.message
@@ -33,7 +33,7 @@ QUnit.log (results) ->
     currentTest.trace = results.source
 
 QUnit.done (results) ->
-  Everblue.done = true
+  Everqueen.done = true
 
 QUnit.config.autorun = false
-window.Everblue = Everblue
+window.Everqueen = Everqueen

@@ -2,12 +2,12 @@
 lib = File.expand_path('../lib/', __FILE__)
 $:.unshift lib unless $:.include?(lib)
 
-require 'everblue/version'
+require 'everqueen/version'
 
 Gem::Specification.new do |s|
-  s.name = "everblue"
-  s.rubyforge_project = "everblue"
-  s.version = Everblue::VERSION
+  s.name = "everqueen"
+  s.rubyforge_project = "everqueen"
+  s.version = Everqueen::VERSION
 
   s.authors = ["Jonas Nicklas"]
   s.email = ["jonas.nicklas@gmail.com"]
@@ -15,9 +15,9 @@ Gem::Specification.new do |s|
 
   s.files = Dir.glob("{bin,lib,spec,config}/**/*") + %w(README.rdoc)
   s.extra_rdoc_files = ["README.rdoc"]
-  s.executables = ['everblue']
+  s.executables = ['everqueen']
 
-  s.homepage = "http://github.com/jnicklas/everblue"
+  s.homepage = "http://github.com/jnicklas/everqueen"
   s.rdoc_options = ["--main", "README.rdoc"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.3.6"

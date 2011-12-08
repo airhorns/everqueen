@@ -1,6 +1,6 @@
-window.Everblue = Everblue = {}
+window.Everqueen = Everqueen = {}
 
-Everblue.Test = (element) ->
+Everqueen.Test = (element) ->
   self = this
   @element = $(element)
   @runLink = @element.find(".run")
@@ -8,7 +8,7 @@ Everblue.Test = (element) ->
     self.run()
     false
 
-Everblue.Test::run = ->
+Everqueen.Test::run = ->
   self = this
   @iframe = $("<iframe></iframe>").attr("src", @runLink.attr("href")).appendTo(@element)
   @iframe.css
@@ -22,7 +22,7 @@ Everblue.Test::run = ->
     innerQUnit.done (results) ->
       self.done results
 
-Everblue.Test::done = (results) ->
+Everqueen.Test::done = (results) ->
   @runLink.removeClass "running"
   if results.failed > 0
     @runLink.addClass("fail").removeClass("pass").text "Fail"
@@ -32,4 +32,4 @@ Everblue.Test::done = (results) ->
 
 $ ->
   $("#tests li, #all").each ->
-    new Everblue.Test(this)
+    new Everqueen.Test(this)

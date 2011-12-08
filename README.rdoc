@@ -1,40 +1,39 @@
-= Everblue
+= Everqueen
 
-{<img src="http://travis-ci.org/jnicklas/everblue.png" />}[http://travis-ci.org/jnicklas/everblue]
+{<img src="http://travis-ci.org/hornairs/everqueen.png" />}[http://travis-ci.org/hornairs/everqueen]
 
-"Because green is the new Blue(Ridge)"
+"Because QUnit is just really simple."
 
-Everblue is a tool to run javascript unit tests for client side JavaScript. It
+Everqueen is a tool to run javascript unit tests for client side JavaScript. It
 combines a server which allows you to serve up and run your tests in a browser,
 as well as a runner which uses Capybara and any of its drivers to run your
-tests. Everblue uses the QUnit unit testing framework for JavaScript.
+tests. Everqueen uses the QUnit unit testing framework for JavaScript.
 
-http://github.com/hornairs/everblue
+http://github.com/hornairs/everqueen
+
+== Fork Note
+
+Everqueen is a serious fork of {Evergreen}[http://github.com/jnicklas/evergreen] by Jonas Nicklas.
+Evergreen rocks, but we wanted to use QUnit instead of Jasmine, and use Sprockets for serving up
+test files instead of the homebrew require system in Evergreen. Thank Jonas for his awesome
+OSS work on Evergreen, because he took us 99% of the way there.
 
 == Philosophy
 
-Everblue is a unit testing tool. Its purpose is to test JavaScript in
+Everqueen is a unit testing tool. Its purpose is to test JavaScript in
 isolation from your application. If you need a tool that tests how your
 JavaScript integrates with your application you should use an integration
 testing framework, such as {Capybara}[http://github.com/jnicklas/capybara].
-
-== Community
-
-Please ask questions on the {mailing
-list}[http://groups.google.com/group/ruby-everblue].  If you have found a
-reproducible error, please {file it on
-GitHub}[https://github.com/jnicklas/everblue/issues]. Do not contact the
-maintainers directly.
 
 == Installation
 
 Install as a Ruby gem:
 
-    gem install everblue
+    gem install everqueen
 
 == Usage
 
-Everblue assumes a file and directory structure, place all your javascript
+Everqueen assumes a file and directory structure, place all your javascript
 code inside ./public and all test files inside ./test/javascripts. All test
 files should end in _test.js. For example:
 
@@ -45,26 +44,26 @@ You can require files from the public directory inside your test file:
 
     require('/javascripts/widget.js')
 
-    describe('a widget', function() {
+    test('a widget', function() {
       ...
     });
 
 You can now look at your test files inside a browser by starting up the
-Everblue server:
+Everqueen server:
 
-    everblue serve
+    everqueen serve
 
 Alternatively you can run the tests headlessly by running:
 
-    everblue run
+    everqueen run
 
 == Integrating with Rails 3
 
-Add Everblue to your Gemfile:
+Add Everqueen to your Gemfile:
 
-    gem 'everblue', :require => 'everblue/rails'
+    gem 'everqueen', :require => 'everqueen/rails'
 
-Start your rails application and navigate to /everblue. You should now see a
+Start your rails application and navigate to /everqueen. You should now see a
 list of all test files, click on one to run it.
 
 There's a rake task provided for you that you can use to run your tests:
@@ -75,73 +74,34 @@ There's a rake task provided for you that you can use to run your tests:
 
 Add the following line to your Rakefile:
 
-    require 'everblue/tasks'
+    require 'everqueen/tasks'
 
 This will give you the `test:javascripts` rake task. Note that mounting is not
-possible under Rails 2 and that `require 'everblue/rails'` will fail.
+possible under Rails 2 and that `require 'everqueen/rails'` will fail.
 
 == Configuration
 
-By default, Everblue uses Selenium to run your tests and assumes a certain
+By default, Everqueen uses Selenium to run your tests and assumes a certain
 directory structure. If this standard is fine for you, then you don't need to
-do anything else. If you need to configure Everblue to suit your needs,
-Everblue will automatically look for and load the following files:
+do anything else. If you need to configure Everqueen to suit your needs,
+Everqueen will automatically look for and load the following files:
 
-    config/everblue.rb
-    .everblue
-    ~/.everblue
+    config/everqueen.rb
+    .everqueen
+    ~/.everqueen
 
 The content of these files could look like this:
 
     require 'capybara-webkit'
 
-    Everblue.configure do |config|
+    Everqueen.configure do |config|
       config.driver = :webkit
       config.public_dir = 'public_html'
-      config.template_dir = 'templates'
       config.test_dir = 'test'
     end
 
-== Transactions
 
-One problem often faced when writing unit tests for client side code is that
-changes to the page are not reverted for the next example, so that successive
-examples become dependent on each other. Everblue adds a testial div to your
-page with an id of test. This div is automatically emptied before each example.
-You should avoid appending markup to the page body and instead append it to
-this test div:
-
-    describe('transactions', function() {
-      it("should add stuff in one test...", function() {
-        $('#test').append('<h1 id="added">New Stuff</h1>');
-        expect($('#test h1#added').length).toEqual(1);
-      });
-
-      it("... should have been removed before the next starts", function() {
-        expect($('#test h1#added').length).toEqual(0);
-      });
-    });
-
-== Templates
-
-Even more powerful than that, Everblue allows you to create HTML templates to
-go along with your tests. Put the templates in their own folder like this:
-
-    test/javascripts/templates/one_template.html
-    test/javascripts/templates/another_template.html
-
-You can then load the template into the test div, by calling the template
-function in your tests:
-
-    describe('transactions', function() {
-      template('one_template.html')
-
-      it("should load the template in this test", function() {
-        ...
-      });
-    });
-
-== test Helper
+== Test Helper
 
 If you add a test_helper file like so:
 
@@ -152,8 +112,8 @@ matchers and the like.
 
 == CoffeeScript
 
-Everblue supports tests written in
-{CoffeeScript}[http://github.com/jashkenas/coffee-script]. Just name your test
+Everqueen supports tests written in
+{CoffeeScript}[http://github.com/jashkenas/coffee-script] via Sprockets. Just name your test
 file _test.coffee and it will automatically be translated for you.
 
 You can also add a CoffeeScript test helper, but remember that CoffeeScript
@@ -167,15 +127,15 @@ test helper to be available in your test files, attach it to the window object:
 
 == Development
 
-If you plan to work on Everblue, you need to checkout the QUnit library, which
+If you plan to work on Everqueen, you need to checkout the QUnit library, which
 is added as a git submodule. Run the following command:
 
     git submodule update --init
 
-If you're using a version of Everblue from git with bundler, you need to tell
+If you're using a version of Everqueen from git with bundler, you need to tell
 bundler to use submodules, this can be achieved with the following command:
 
-    gem 'everblue', :submodules => true, :git => 'git://github.com/jnicklas/everblue.git'
+    gem 'everqueen', :submodules => true, :git => 'git://github.com/jnicklas/everqueen.git'
 
 == License:
 

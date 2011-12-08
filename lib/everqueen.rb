@@ -3,16 +3,16 @@ require 'sinatra/base'
 require 'capybara'
 require 'launchy'
 require 'coffee-script'
-require 'everblue/version'
-require 'everblue/application'
+require 'everqueen/version'
+require 'everqueen/application'
 require 'json'
 
-module Everblue
-  autoload :Cli, 'everblue/cli'
-  autoload :Server, 'everblue/server'
-  autoload :Runner, 'everblue/runner'
-  autoload :Suite, 'everblue/suite'
-  autoload :Test, 'everblue/test'
+module Everqueen
+  autoload :Cli, 'everqueen/cli'
+  autoload :Server, 'everqueen/server'
+  autoload :Runner, 'everqueen/runner'
+  autoload :Suite, 'everqueen/suite'
+  autoload :Test, 'everqueen/test'
 
   class << self
     attr_accessor :driver, :public_dir, :test_dir, :root, :mounted_at, :application
@@ -23,7 +23,7 @@ module Everblue
 
     def use_defaults!
       configure do |config|
-        config.application = Everblue::Application
+        config.application = Everqueen::Application
         config.driver = :selenium
         config.public_dir = 'public'
         config.test_dir = 'test/javascripts'
@@ -54,13 +54,13 @@ module Everblue
       return if root.nil?
       old_dir = File.expand_path(old_dir, root)
       new_dir = File.expand_path(new_dir, root)
-      old_paths = Everblue::AssetsEnvironment.clear_paths
+      old_paths = Everqueen::AssetsEnvironment.clear_paths
       old_paths.delete(old_dir)
       old_paths.unshift(new_dir).each do |dir|
-        Everblue::AssetsEnvironment.append_path(dir)
+        Everqueen::AssetsEnvironment.append_path(dir)
       end
     end
   end
 end
 
-Everblue.use_defaults!
+Everqueen.use_defaults!

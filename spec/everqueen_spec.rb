@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Everblue::Application do
+describe Everqueen::Application do
   include Capybara::DSL
 
   it "should show a successful test run" do

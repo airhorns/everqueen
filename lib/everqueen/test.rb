@@ -1,6 +1,6 @@
 require 'open3'
 
-module Everblue
+module Everqueen
   class Test
     attr_reader :name, :suite
 
@@ -14,7 +14,7 @@ module Everblue
     end
 
     def full_path
-      File.join(root, Everblue.test_dir, name)
+      File.join(root, Everqueen.test_dir, name)
     end
 
     alias_method :asset_path, :name

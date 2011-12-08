@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'bundler/setup'
 
-require 'everblue'
+require 'everqueen'
 require 'rspec'
 
 require 'capybara/dsl'
@@ -11,16 +11,16 @@ require 'pry'
 
 TEST_DRIVER = :webkit
 
-Everblue.root = File.expand_path('suite1', File.dirname(__FILE__))
+Everqueen.root = File.expand_path('suite1', File.dirname(__FILE__))
 
-Capybara.app = Everblue::Application
+Capybara.app = Everqueen::Application
 Capybara.default_driver = TEST_DRIVER
 
-module EverblueMatchers
+module EverqueenMatchers
   class PassTest # :nodoc:
     def matches?(actual)
       @actual = actual
-      @runner = Everblue::Runner.new(StringIO.new).test_runner(@actual)
+      @runner = Everqueen::Runner.new(StringIO.new).test_runner(@actual)
       @runner.passed?
     end
 
@@ -39,11 +39,11 @@ module EverblueMatchers
 end
 
 RSpec.configure do |config|
-  config.include EverblueMatchers
+  config.include EverqueenMatchers
   config.before do
     Capybara.reset_sessions!
-    Everblue.use_defaults!
-    Everblue.root = File.expand_path('suite1', File.dirname(__FILE__))
-    Everblue.driver = TEST_DRIVER
+    Everqueen.use_defaults!
+    Everqueen.root = File.expand_path('suite1', File.dirname(__FILE__))
+    Everqueen.driver = TEST_DRIVER
   end
 end

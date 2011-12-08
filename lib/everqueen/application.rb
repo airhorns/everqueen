@@ -1,6 +1,6 @@
 require 'sprockets'
 
-module Everblue
+module Everqueen
   class TestApplication < Sinatra::Base
 
     set :static, false
@@ -8,23 +8,22 @@ module Everblue
 
     helpers do
       def url(path)
-        Everblue.mounted_at.to_s + path.to_s
+        Everqueen.mounted_at.to_s + path.to_s
       end
     end
 
     get '/' do
-      Everblue.root = "/Users/hornairs/Code/everblue/spec/suite1"
-      @suite = Everblue::Suite.new
+      @suite = Everqueen::Suite.new
       erb :list
     end
 
     get '/run/all' do
-      @suite = Everblue::Suite.new
+      @suite = Everqueen::Suite.new
       erb :run
     end
 
     get '/run/*' do |name|
-      @suite = Everblue::Suite.new
+      @suite = Everqueen::Suite.new
       @test = @suite.get_test(name)
       erb :run
     end

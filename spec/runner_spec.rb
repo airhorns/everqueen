@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Everblue::Runner do
-  let(:suite) { Everblue::Suite.new }
-  let(:runner) { Everblue::Runner.new(buffer) }
+describe Everqueen::Runner do
+  let(:suite) { Everqueen::Suite.new }
+  let(:runner) { Everqueen::Runner.new(buffer) }
   let(:buffer) { StringIO.new }
 
   describe '#run' do
