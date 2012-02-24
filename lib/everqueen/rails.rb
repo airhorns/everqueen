@@ -8,6 +8,11 @@ module Everqueen
         Everqueen.application = Rails.application
         Everqueen.root = Rails.root
         Everqueen.mounted_at = "/everqueen"
+        if Rails.application.assets
+          Rails.application.assets.paths.each do |path|
+            Everqeen::AssetsEnvironment.append_path path
+          end
+        end
       end
     end
   end
