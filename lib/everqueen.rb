@@ -54,10 +54,10 @@ module Everqueen
       return if root.nil?
       old_dir = File.expand_path(old_dir, root)
       new_dir = File.expand_path(new_dir, root)
-      old_paths = Everqueen::AssetsEnvironment.clear_paths
+      old_paths = Everqueen.assets_environment.clear_paths
       old_paths.delete(old_dir)
       old_paths.unshift(new_dir).each do |dir|
-        Everqueen::AssetsEnvironment.append_path(dir)
+        Everqueen.assets_environment.append_path(dir)
       end
     end
   end
