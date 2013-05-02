@@ -1,3 +1,7 @@
+<% if @inject_script %>
+  <script type="text/javascript" src="<%= @inject_script %>"></script>
+<% end %>
+
 <script type="text/javascript" src="<%= url("/assets/run.js") %>"></script>
 <% if @test %>
 <script type="text/javascript" src="<%= url("/assets/" + @test.asset_path) %>"></script>

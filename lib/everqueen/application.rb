@@ -25,6 +25,7 @@ module Everqueen
     get '/run/*' do |name|
       @suite = Everqueen::Suite.new
       @test = @suite.get_test(name)
+      @inject_script = params[:inject_script] if params[:inject_script].present?
       erb :run
     end
   end
@@ -53,8 +54,6 @@ module Everqueen
   end
 
   Application = Rack::Builder.app do
-
-
     map '/assets' do
       run lambda { |env| Everqueen.assets_environment.call(env) }
     end
